@@ -1,0 +1,42 @@
+#!/bin/sh
+L=`dirname $0`/../target/dep
+cp=`echo $L/*.jar|sed 's/ /:/g'`
+
+exec scala  -classpath  $cp  "$0" "$@"
+!#
+
+import java.sql.DriverManager
+import java.sql.Connection
+
+object ScalaJdbcConnectSelect {
+ 
+  def main(args: Array[String]) {
+    // connect to the database named "mysql" on the localhost
+    val driver = "com.mysql.jdbc.Driver"
+    val url = "jdbc:mysql://localhost/aggregator"
+    val username = "cache"
+    val password = "plenty"
+ 
+    var connection:Connection = null
+ 
+    try {
+      // make the connection
+      Class.forName(driver)
+      connection = DriverManager.getConnection(url, username, password)
+ 
+      // create the statement, and run the select query
+      val statement = connection.createStatement()
+      val resultSet = statement.executeQuery("SELECT * FROM d_stats where rec_time='"+args(0)+"' ;")
+      while ( resultSet.next() ) {
+        val domain = resultSet.getString("domain")
+        
+        println("host, user = " + domain)
+      }
+    } catch {
+      case e:Exception => e.printStackTrace
+    }
+    connection.close()
+  } 
+ }
+
+ScalaJdbcConnectSelect.main(args)

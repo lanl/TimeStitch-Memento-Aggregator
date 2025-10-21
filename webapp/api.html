@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>API - MementoWeb</title>
+    <link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css">
+    <link rel="stylesheet" href="css/timetravel.css">
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui-1.10.4.min.js"></script>
+    <script src="js/mementoutils.js"></script>
+    <script>
+
+    $(function() {
+            /*
+        $("#list_menu_top").load("/menu_top.html");
+        $("#list_footer").load("/menu_bottom.html", function() {
+            $("#menu_bottom").center();
+        });
+        */
+        $( window ).resize( function() {
+            $("#menu_bottom").center();
+            $(".wrapper").css("min-height", calculateMinHeightForResults()+16 + 100 + "px");
+            });
+        $(".wrapper").css("min-height", calculateMinHeightForResults()+16 + 100 + "px");
+    });
+    </script>
+    <style>
+        html, body {
+            width: 100%;
+        }
+        .wrapper {
+            width: 880px;
+            margin: 0 auto -4em;
+            padding-bottom: 50px;
+        }
+        #memento_img {
+            width: 80px;
+            height: 80px;
+        }
+        #mw_header {
+            background: #ddd;
+            padding: 10px 10px 0 10px;
+            margin-top: 10px;
+        }
+        #mw_header input {
+            padding: 5px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="menu_top"></div>
+<div id='share_bar'></div>
+<div class="wrapper">
+    <div id='logo'>
+        <img id='memento_img' src='css/images/memento.png'/>
+        <h1 id='page_title'>API - Time Travel</h1>
+    </div>
+    <div id="motivation">
+        <p>This page provides information that will help understand the basics of the APIs available:
+        <ul>
+            <li><a href="#memento">Memento</a></li>
+            <li><a href="#timegate">TimeGate</a></li>
+            <li><a href="#timemap">TimeMap</a></li>
+        </ul>
+    </div>
+    <div id="memento">
+        <a name="memento"><h2>Memento</h2></a>
+        The Memento service provides an easy way to find a memento by simply appending the desired date time and the URL of a resource in the URL of the service. The responses can either be an HTTP redirect to the memento itself or in a JSON format.
+        <h3>HTML Response</h3>
+        <h4>Request</h4>
+        <pre>http://mementoweb.org/memento/YYYY&lt;MM|DD|HH|MM|SS&gt;/http://example.com</pre>
+        <h4>Response</h4>
+        A HTTP redirect (HTTP 302) to the memento.
+        <h3>JSON Response</h3>
+        <h4>Request</h4>
+        <pre>http://mementoweb.org/api/json/YYYY&lt;MM|DD|HH|MM|SS&gt;/http://example.com</pre>
+        <h4>Response</h4>
+        <pre>
+{
+&nbsp;&nbsp;&nbsp;&nbsp;"original_uri": "http://example.com/",
+&nbsp;&nbsp;&nbsp;&nbsp;"timegate_uri": "http://an.archive.org/timegate/http://example.com/",
+&nbsp;&nbsp;&nbsp;&nbsp;"timemap_uri": {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"json_format": "http://an.archive.org/timemap/json/http://example.com/",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"link_format": "http://an.archive.org/timemap/link/http://example.com/"
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;"mementos": {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"first": {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"datetime": "2000-06-21T04:41:56Z",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"uri": "http://an.archive.org/20010621044156/http://example.com/"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"prev": {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"datetime": "2005-04-10T07:05:12Z",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"uri": "http://an.archive.org/20050410070512/http://example.com/"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"closest": {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"datetime": "2008-04-10T20:30:51Z",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"uri": "http://an.archive.org/20080410203051/http://example.com/"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"next": {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"datetime": "2009-04-10T23:45:20Z",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"uri": "http://an.archive.org/20090410234520/http://example.com/"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"last": {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"datetime": "2012-08-31T12:22:34Z",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"uri": "http://an.archive.org/20120831122234/http://example.com/"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+        </pre>
+
+        In the request URLs above, the minimum requirement for the date time value are the years as YYYY, and the months, days, hours, minutes and the seconds value are optional.
+        The following are all valid requests:
+        <pre>
+http://mementoweb.org/memento/2013/http://example.com
+http://mementoweb.org/memento/201301/http://example.com
+http://mementoweb.org/memento/20130115/http://example.com
+http://mementoweb.org/memento/2013011510/http://example.com
+http://mementoweb.org/memento/201301151020/http://example.com
+http://mementoweb.org/memento/20130115102033/http://example.com
+        </pre>
+    </div>
+    <div id="timegate">
+        <a name="timegate"><h2>TimeGate</h2></a>
+        The TimeGate is a service provided by the Memento Aggregator that gathers information about Mementos across all the collections in web archives. The Aggregator natively supports the Memento protocol. The TimeGate is very similar to the <a href="#memento">Memento service</a> above, but this is a pure Memento implementation where the preferred date time value is provided in the Accept-Datetime HTTP header. Please refer to the <a href="http://www.mementoweb.org/guide/">memento guide</a> for more information.
+
+        An example HTTP HEAD request to the TimeGate and it's response using <a href="http://curl.haxx.se/">cURL</a> is shown below. 
+        <h4>Request</h4>
+        <pre>
+curl -I \
+-H "Accept-Datetime: Sat, 16 Jun 2012 16:15:25 GMT" \
+http://mementoweb.org/timegate/http://www.w3.org/TR/webarch/
+        </pre>
+        <h4>Response</h4>
+        <pre>
+HTTP/1.1 302 Moved Temporarily
+Location: /web/20141010132507/http://www.w3.org/TR/webarch/
+Vary: accept-datetime
+Link: &lt;http://www.w3.org/TR/webarch/&gt;; rel="original",
+      &lt;http://web.archive.org/web/timemap/link/http://www.w3.org/TR/webarch/&gt;;
+          rel="timemap"; 
+          type="application/link-format",
+      &lt;http://web.archive.org/web/20141010132507/http://www.w3.org/TR/webarch/&gt;;
+          rel="last memento";
+          datetime="Fri, 10 Oct 2014 13:25:07 GMT",
+      &lt;http://web.archive.org/web/20020911073933/http://www.w3.org/TR/webarch/&gt;;
+          rel="first memento"; 
+          datetime="Wed, 11 Sep 2002 07:39:33 GMT",
+      &lt;http://web.archive.org/web/20140802162349/http://www.w3.org/TR/webarch/&gt;;
+          rel="prev memento";
+          datetime="Sat, 02 Aug 2014 16:23:49 GMT"
+        </pre>
+    </div>
+    <div id="timemap">
+        <a name="timemap"><h2>TimeMap</h2></a>
+        The Memento Aggregator also provides a TimeMap service, which gives a list of all the Mementos available across archives. The TimeMap is serialized in <a href="https://tools.ietf.org/html/rfc5988">Link Header</a> format with the <pre>application/link-format</pre> Content-Type HTTP header.
+        <h4>Request</h4>
+        <pre>
+curl http://web.archive.org/web/timemap/link/http://www.w3.org/TR/webarch/
+        </pre>
+        <h4>Response</h4>
+        <pre>
+&lt;http://www.w3.org/TR/webarch/&gt;; rel="original",
+&lt;http://web.archive.org/web/timemap/link/http://www.w3.org/TR/webarch/&gt;; rel="self"; type="application/link-format"; from="Wed, 11 Sep 2002 07:39:33 GMT"; until="Fri, 10 Oct 2014 13:25:07 GMT",
+&lt;http://web.archive.org/web/http://www.w3.org/TR/webarch/&gt;; rel="timegate",
+&lt;http://web.archive.org/web/20020911073933/http://www.w3.org/TR/webarch/&gt;; rel="first memento"; datetime="Wed, 11 Sep 2002 07:39:33 GMT",
+&lt;http://web.archive.org/web/20021010101032/http://www.w3.org/TR/webarch/&gt;; rel="memento"; datetime="Thu, 10 Oct 2002 10:10:32 GMT",
+&lt;http://web.archive.org/web/20021203004021/http://www.w3.org/TR/webarch/&gt;; rel="memento"; datetime="Tue, 03 Dec 2002 00:40:21 GMT",
+....
+        </pre>
+    </div>
+</div>
+<div id="list_footer"></div>
+</body>
+</html>

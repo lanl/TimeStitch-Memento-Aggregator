@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<links>
+         <link>
+         <timegate uri="http://api.wayback.archive.org/memento/timegate/" />
+         <timemap  uri="http://api.wayback.archive.org/list/timemap/link/" />
+         </link>
+          <link>
+          <timegate   uri="http://theresourcedepot.org/000010/timegate/"/>
+           <timemap  uri="http://theresourcedepot.org/000010/timemap/link/"/>
+          </link>
+         <link>
+         <timegate uri="http://www.webarchive.org.uk/waybacktg/memento/timegate/" />
+         <timemap  uri="http://www.webarchive.org.uk/waybacktg/ore/timemap/link/" />
+         </link>
+         <link>
+         <timegate uri="http://mementoproxy.lanl.gov/web/timegate/" />
+         <timemap  uri="http://mementoproxy.lanl.gov/web/timemap/link/" />
+         </link>
+          <link>
+         <timegate uri="http://mementoproxy.lanl.gov/ait/timegate/" />
+         <timemap  uri="http://mementoproxy.lanl.gov/ait/timemap/link/" />
+         </link>
+         <link>
+         <timegate uri="http://mementoproxy.lanl.gov/loc/timegate/" />
+         <timemap  uri="http://mementoproxy.lanl.gov/loc/timemap/link/" />
+         </link>
+        <link>
+         <timegate uri="http://mementoproxy.lanl.gov/uk/timegate/" />
+         <timemap  uri="http://mementoproxy.lanl.gov/uk/timemap/link/" />
+         </link>
+         <link>
+         <timegate uri="http://mementoproxy.lanl.gov/aweu/timegate/" />
+         <timemap  uri="http://mementoproxy.lanl.gov/aweu/timemap/link/" />
+         </link>
+         <link>
+         <timegate uri="http://mementoproxy.lanl.gov/can/timegate/" />
+         <timemap  uri="http://mementoproxy.lanl.gov/can/timemap/link/" />
+         </link>
+        <link>
+         <timegate uri="http://mementoproxy.lanl.gov/cn/timegate/" />
+         <timemap  uri="http://mementoproxy.lanl.gov/cn/timemap/link/" />
+         </link>
+</links>

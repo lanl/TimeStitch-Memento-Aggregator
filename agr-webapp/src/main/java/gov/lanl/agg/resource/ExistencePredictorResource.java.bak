@@ -1,0 +1,95 @@
+
+package gov.lanl.agg.resource;
+
+import gov.lanl.agg.helpers.PredictionResponse;
+import gov.lanl.aggregatorml.main.ClassifierPool;
+
+import org.apache.log4j.Logger;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+@Path("/predict-archives")
+public class ExistencePredictorResource {
+
+    private static Logger logger = Logger.getLogger(ExistencePredictorResource.class);
+    private static ClassifierPool pool;
+    static{
+      //  try {
+            pool = (ClassifierPool) MyInitServlet.getInstance().getAttribute("classifierpool");
+            		//ClassifierPool.loadInstance("models");
+        //    logger.info("Models loaded successfully");
+        //} catch (FileNotFoundException e){
+          //  logger.error("learning models not found");
+        //}
+    }
+    private static String[] allArchives = new String[]{
+            "proni", "ba", "blarchive", "webcite", "sg", "loc", "archiveit", "ukparliament", "uknationalarchives",
+            "gcwa", /*"archive.is"*/ "hr", "pt", "es", "swa"
+    };
+    private static Set<String> archivesSet= new HashSet<String>(Arrays.asList(allArchives));
+    
+    public Response predictExistence(String urlR, String[] archivesToConsider) {
+
+        if(pool == null){
+                return Response.serverError().type(MediaType.TEXT_PLAIN_TYPE).entity("learning models couldn't be loaded").build();
+        }
+
+        String[] potentialHolders;
+        try {
+            potentialHolders = pool.predictNecessaryRequests(urlR, archivesToConsider );
+        } catch(Exception e){
+            Logger.getLogger(this.getClass()).error(e);
+            return Response.status(400).type(MediaType.TEXT_PLAIN_TYPE).entity("malformed URL").build();
+        }
+
+        PredictionResponse prediction = new PredictionResponse();
+        prediction.setArchivesPredicted(potentialHolders);
+        prediction.setActualRecall(0.7);
+
+        return Response.ok(prediction).build();
+    }
+
+    @GET
+    @Path("/{archivesToConsider:[^/]+}/{urlR:http://.*}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response predictExistenceFromSpecificArchives(@PathParam("archivesToConsider") String archivesToConsider, @PathParam("urlR") String urlR) {
+
+        if(!archivesToConsider.toLowerCase().matches("\\w+(-\\w+)*")){
+            return Response.status(400).type(MediaType.TEXT_PLAIN_TYPE).entity("archives must be separated by -").build();
+        }
+
+        String[] archives = archivesToConsider.split("-");
+        for(String archiveName:archives){
+            if(!archivesSet.contains(archiveName)){
+                return Response.status(400).type(MediaType.TEXT_PLAIN_TYPE).entity("Archive '" + archiveName + "' is not supported").build();
+            }
+        }
+
+        return predictExistence(urlR, archives);
+    }
+
+    @GET
+    @Path("/{urlR:http://.*}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response predictExistenceFromAllArchives(@PathParam("urlR") String urlR) {
+
+        return predictExistence(urlR, allArchives);
+    }
+
+    @GET
+    @Path("/{any:.*}")
+    public Response onInvalidUrl() {
+
+        return Response.status(404).entity("404 Not Found, example of a valid url : /predict-archives/http://www.google.fr (protocols matters)").build();
+    }
+}

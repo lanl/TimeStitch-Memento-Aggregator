@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roolie-rules-config>
+ <rule-definitions>
+
+  <rule-def name="searchThisArchive">
+      <rule name="includeChina" or-next-rule="true" />
+      <rule name="isHungarian" />
+      <rule name="sufficientFundsAvailable" />
+      <rule name="exceedsDailyLimit" inverse="true" />
+    </rule-def>
+
+ <rule-implementations>
+ <rule-impl name="isHungarian" class="gov.lanl.agg.filter.rule.DomainSuffix">
+      <property name="domainSuffixes">
+        <list>
+          <list-item value="hr" />
+        </list>
+      </property>
+      <property name="archiveName" value="hr" />
+    </rule-impl>
+
+<rule-impl name="isChina" class="gov.lanl.agg.filter.rule.DomainSuffix">
+      <property name="domainSuffixes">
+        <list>
+          <list-item value="cn" />
+       </list>
+      </property>
+      <property name="archiveName" value="cn" />
+    </rule-impl>
+
+
+
+
+ </rule-implementations>
+<!--
+      Override for the default RuleFactory implementation.
+      Class must implement net.sf.roolie.core.RuleFactory.
+    -->
+    <rule-factory-class class="net.sf.roolie.core.banking.sample.test.impl.BankingRuleFactory" />
+
+    <!--
+      Override for the default RuleEvaluator implementation.
+      Class must implement net.sf.roolie.core.RuleEvaluator.
+    -->
+    <rule-evaluator-class class="net.sf.roolie.core.banking.sample.test.impl.BankingRuleEvaluator" />
+
+  </roolie-config>
+
+</roolie-rules-config>

@@ -1,0 +1,311 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>gov.lanl.agg</groupId>
+		<artifactId>agg-projects</artifactId>
+		<version>1.0</version>
+	</parent>
+	<groupId>gov.lanl.agg</groupId>
+	<artifactId>agr-webapp</artifactId>
+	<!-- <packaging>war</packaging> -->
+	<packaging>jar</packaging>
+	<version>1.0</version>
+	<name>Aggregator Webapp</name>
+	<build>
+		<finalName>agg</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>com.mycila.maven-license-plugin</groupId> <artifactId>maven-license-plugin</artifactId> 
+				<configuration> <header>src/etc/header.txt</header> </configuration> </plugin> -->
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>license-maven-plugin</artifactId> 
+				<version>1.0</version> <executions> <execution> <id>download-licenses</id> 
+				<goals> <goal>download-licenses</goal> </goals> </execution> </executions> 
+				</plugin> -->
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>gov.lanl.agg</groupId>
+			<artifactId>agg-core</artifactId>
+		</dependency>
+
+		<!-- <dependency <groupId>gov.lanl.memento</groupId> <artifactId>learning.core</artifactId> 
+			<version>1.0</version> <scope>system</scope> <systemPath>${project.basedir}/src/main/resources/aggregator-ml-assembly-1.0.jar</systemPath> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.apache.spark</groupId> <artifactId>spark-mllib_2.10</artifactId> 
+			<version>1.5.0</version> </dependency> -->
+		<dependency>
+			<groupId>com.leansoft</groupId>
+			<artifactId>bigqueue</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		<!-- Gson: Java to Json conversion -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.lambdaj</groupId>
+			<artifactId>lambdaj</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<!-- not really dependancy -->
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- not really dependancy -->
+		<!-- <dependency> <groupId>org.glassfish.tyrus</groupId> <artifactId>tyrus-server</artifactId> 
+			<version>1.1</version> </dependency> -->
+		<!-- not really dependancy -->
+		<dependency>
+			<groupId>org.glassfish.tyrus</groupId>
+			<artifactId>tyrus-client</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jolbox</groupId>
+			<artifactId>bonecp</artifactId>
+			<version>0.8.0-rc1</version>
+		</dependency>
+		<!-- <dependency> <groupId>opensymphony</groupId> <artifactId>quartz</artifactId> 
+			<version>1.6.3</version> </dependency> -->
+		<!-- javamelody-core -->
+		<!-- <dependency> <groupId>net.bull.javamelody</groupId> <artifactId>javamelody-core</artifactId> 
+			<version>1.31.0</version> </dependency> -->
+		<!-- <dependency> <groupId>fastutil</groupId> <artifactId>fastutil</artifactId> 
+			<version>5.0.9</version> </dependency> -->
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+	<!--	  <dependency>
+	      <groupId>org.glassfish.grizzly</groupId>
+	      <artifactId>grizzly-http-servlet</artifactId>
+	       <version>2.3.24</version>
+          </dependency>
+          <dependency>
+	<groupId>org.glassfish.grizzly</groupId>
+	<artifactId>grizzly-http-server</artifactId>
+	<version>2.3.24</version>
+</dependency>
+  <dependency>
+	<groupId>org.glassfish.jersey.containers</groupId>
+	<artifactId>jersey-container-grizzly2-http</artifactId>
+	<version>2.22.2</version>
+</dependency> 
+<dependency>
+	<groupId>org.glassfish.jersey.core</groupId>
+	<artifactId>jersey-client</artifactId>
+	<version>2.22.2</version>
+</dependency>
+<dependency>
+	<groupId>org.glassfish.jersey.core</groupId>
+	<artifactId>jersey-common</artifactId>
+	<version>2.22.2</version>
+</dependency>
+ <dependency>
+	<groupId>org.glassfish.jersey.containers</groupId>
+	<artifactId>jersey-container-servlet</artifactId>
+	<version>2.22.2</version>
+</dependency>
+
+<dependency>
+	<groupId>org.glassfish.jersey.core</groupId>
+	<artifactId>jersey-server</artifactId>
+	<version>2.22.2</version>
+</dependency>
+
+<dependency>
+    <groupId>org.glassfish.grizzly</groupId>
+    <artifactId>grizzly-utils</artifactId>
+    <version>2.0-b2</version>
+</dependency>
+<dependency>
+<groupId>javax.servlet</groupId>
+<artifactId>javax.servlet-api</artifactId>
+<version>3.1.0</version>
+</dependency>  -->
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.grizzly</groupId>
+			<artifactId>grizzly-http-servlet</artifactId>
+			<version>1.9.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.grizzly</groupId>
+			<artifactId>grizzly-utils</artifactId>
+			<version>1.9.8</version>
+		</dependency> 
+		<!-- <dependency> <groupId>apache-xerces</groupId> <artifactId>xercesImpl</artifactId> 
+			<version>2.9.1</version> </dependency> -->
+		<!-- <dependency> <groupId>com.ibm.icu</groupId> <artifactId>icu4j</artifactId> 
+			<version>3.4.4</version> </dependency> -->
+		<!-- <dependency> <groupId>joda-time</groupId> <artifactId>joda-time</artifactId> 
+			<version>1.6</version> </dependency> -->
+		<!-- <dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-server</artifactId> 
+			<version>${jersey-version}</version> </dependency> -->
+			
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>  
+		 <dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-json</artifactId> 
+			<version>${jersey-version}</version> </dependency> 
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-bundle</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>  
+		<!-- <dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-atom</artifactId> 
+			<version>${jersey-version}</version> </dependency> -->
+		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
+			<version>3.8.2</version> <scope>test</scope> </dependency> -->
+		<!-- <dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-client</artifactId> 
+			<version>${jersey-version}</version> </dependency> -->
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-apache-client</artifactId>
+			<version>${jersey-version}</version>
+		</dependency>
+		<dependency>
+    <groupId>com.sun.jersey</groupId>
+    <artifactId>jersey-core</artifactId>
+    <version>1.19</version>
+</dependency>
+		<dependency>
+			<groupId>com.sun.grizzly</groupId>
+			<artifactId>grizzly-servlet-webserver</artifactId>
+			<version>1.9.8</version>
+		</dependency> 
+ 
+		<!-- <dependency> <groupId>com.sun.grizzly</groupId> <artifactId>grizzly-http-webserver</artifactId> 
+			<version>2.0.0-M3</version> </dependency> <dependency> <groupId>org.glassfish.grizzly</groupId> 
+			<artifactId>grizzly-servlet-webserver</artifactId> <version>2.0.0-M2</version> 
+			</dependency> <dependency> <groupId>org.glassfish.grizzly</groupId> <artifactId>grizzly-http-server</artifactId> 
+			<version>2.3.3</version> </dependency> -->
+		<!--<dependency>
+			<groupId>org.glassfish.grizzly</groupId>
+			<artifactId>grizzly-http-servlet</artifactId>
+			<version>2.2.16</version>
+		</dependency>  -->
+		
+		
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+
+	<!--	<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version> 
+			
+		</dependency> -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>2.16.0</version>
+ </dependency>
+		<!-- <dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-grizzly2</artifactId> 
+			<version>1.9</version> </dependency> -->
+		<!-- <dependency> <groupId>com.sun.jersey</groupId> <artifactId>jersey-grizzly2-servlet</artifactId> 
+			<version>1.17</version> </dependency> -->
+		<!-- <dependency> <groupId>org.glassfish.jersey.containers</groupId> <artifactId>jersey-container-grizzly2-http</artifactId> 
+			<version>2.6</version> </dependency> -->
+		<!-- <dependency> <groupId>org.glassfish.jersey.containers</groupId> <artifactId>jersey-container-servlet-core</artifactId> 
+			<version>2.6</version> </dependency> -->
+		<!-- <dependency> <groupId>org.glassfish.jersey.media</groupId> <artifactId>jersey-media-json-jackson</artifactId> 
+			<version>2.3.1</version> </dependency> -->
+		<!-- <dependency> <groupId>org.codehaus.jackson</groupId> <artifactId>jackson-jaxrs</artifactId> 
+			<version>1.9.13</version> </dependency> -->
+	</dependencies>
+	<properties>
+		<jersey-version>1.19</jersey-version>
+	</properties>
+	<repositories>
+		<repository>
+			<id>glassfish-maven2-repository.dev.java.net</id>
+			<name>Java.net Maven 2 Repository for GlassFish</name>
+			<url>http://download.java.net/maven/glassfish/</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Maven 2 Repository</name>
+			<url>http://download.java.net/maven/2/</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>maven-repository.dev.java.net</id>
+			<name>Java.net Maven 1 Repository (legacy)</name>
+			<url>http://download.java.net/maven/1</url>
+		</repository>
+		<repository>
+			<id>github.release.repo</id>
+			<url>https://raw.github.com/bulldog2011/bulldog-repo/master/repo/releases/</url>
+		</repository>
+		<!-- <repository> <id>jena</id> <name>Jena Maven 1 Repository (legacy)</name> 
+			<url>http://openjena.org/repo/</url> </repository> -->
+		<!-- <repository> <id>ibiblio.org</id> <url>http://mirrors.ibiblio.org/pub/mirrors/maven2/</url> 
+			</repository> -->
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2/</url>
+			<layout>default</layout>
+		</pluginRepository>
+		<pluginRepository>
+			<id>maven-repository.dev.java.net</id>
+			<name>Java.net Maven 1 Repository (legacy)</name>
+			<url>http://download.java.net/maven/1</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>

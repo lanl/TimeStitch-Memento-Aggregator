@@ -1,0 +1,94 @@
+body {
+    width: 1000px;
+    margin: 0 auto;
+    font-family: arial,sans-serif;
+}
+#header {
+    background: #E2E1E1;
+    padding: 10px 10px 0 10px;
+    margin-top: 10px;
+}
+#header input {
+    padding: 5px;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+#search {
+    background: #525252;
+    color: #ddd;
+}
+#search:hover {
+    color: #ccc;
+}
+#memento_logo {
+    float: left;
+    width: 80px;
+    height: 80px;
+    padding-right: 10px;
+}
+#metadata {
+    padding: 10px 10px 10px 10px;
+    background: #ddd;
+    margin-top: 10px;
+}
+#timeline {
+    /*margin-left: 70px;*/
+    padding-top: 10px;
+    width: 900px;
+    height: 100px;
+}
+#summary {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0 auto;
+} 
+#summary a {
+    padding-right: 30px;
+}
+.chart {
+    font-size: 10px;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.tick line{
+    stroke: #949494;
+}
+.tick text {
+    font-weight: bold;
+}
+.chart_infobox {
+    border: 2px solid black;
+    border-radius: 4px;
+    box-shadow: #333333 0px 0px 10px;
+    margin: 200px auto;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 10500;
+    font-weight: bold;
+}
+.sub-results {
+    margin-left: 20px;
+}
+.sub-results-row {
+    font-size: 1.0em;
+    padding-top: 10px;
+}
+.sub-results-row a {
+    padding-left: 10px;
+}
+.archive-img {
+    float: left;
+    padding: 10px;
+    background: #000;
+    width: 20px;
+    height: 20px;
+}
+.memento-links {
+    margin: 60px;
+}

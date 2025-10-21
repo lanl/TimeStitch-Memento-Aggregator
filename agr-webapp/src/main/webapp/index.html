@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>Memento TimeTravel</title>
+    <link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css">
+    <link rel="stylesheet" href="css/timetravel.css">
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui-1.10.4.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/timetravel.js"></script>
+    <script>
+        var memento_distribution = {
+            "201403": "10",
+            "201005": "30",
+            "201111": "55",
+            "199910": "1",
+            "200111": "33"
+        }
+
+    </script>
+</head>
+<body>
+    <div id='header'>
+        <img id='memento_logo' src='http://www.mementoweb.org/mementologo.png'/>
+        <input type="text" id="url" size="88" class='ui-corner-all' value='http://' />
+        <br/>
+        <input type="text" id="datepicker" class='ui-corner-all' size="15"/>
+        <input type="text" id="timepicker" class='ui-corner-all' size="15"/>
+        <button id='search' name='search'>Time Travel</button>
+    </div>
+    <div id='metadata'>
+        <div id='timeline' name='timeline'></div>
+        <div class='chart_infobox' style='display:none;'></div>
+    </div>
+    <div class='results'>
+        <div class='archive-img'>
+            <img src='http://archive.org/images/glogo2.png' style='background: #000; width: 20px; height: 20px;'/>
+        </div>
+        <div class='memento-links'>
+            <h2>
+                <a href='#'>
+                    Internet Archive: May 29, 2013
+                </a>
+                <br/>
+            </h2>
+            <i>http://web.archive.org/20130529/http://mementoweb.org</i>
+            <div class='sub-results'>
+                <div class='sub-results-row'>
+                    <a href='#'>
+                        Previous Memento: May 28, 2013
+                    </a>
+                    <a href='#'>
+                        Next Memento: May 30, 2013
+                    </a>
+                </div>
+                <div class='sub-results-row'>
+                    <a href='#'>
+                        First Memento: May 28, 2001
+                    </a>
+                    <a href='#'>
+                        Last Memento: May 28, 2014
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <a style='font-size: 0.8em;' href='#'>All 2000 captures from Internet Archive between 2001 and 2014 >></a>
+
+        </div>
+    </div>
+    <div class='results'>
+        <div class='archive-img'>
+            <img src='http://archive.today/favicon.ico'/>
+        </div>
+        <div class='memento-links'>
+            <h2>
+                <a href='#'>
+                    Archive Today: May 28, 2013
+                </a>
+            </h2>
+            <div class='sub-results'>
+                <div class='sub-results-row'>
+                    <a href='#'>
+                        Previous Memento: May 27, 2013
+                    </a>
+                    <a href='#'>
+                        Next Memento: May 30, 2013
+                    </a>
+                </div>
+                <div class='sub-results-row'>
+                    <a href='#'>
+                        First Memento: May 28, 2001
+                    </a>
+                    <a href='#'>
+                        Last Memento: May 28, 2014
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='memento_distribution'>
+        <input type='hidden' name='may_2008' id='may_2008' value='10' />
+        <input type='hidden' name='april_2010' id='april_2010' value='30' />
+        <input type='hidden' name='may_2001' id='may_2001' value='40' />
+        <input type='hidden' name='dec_1999' id='dec_1999' value='60' />
+        <input type='hidden' name='jan_2014' id='jan_2014' value='1' />
+        <input type='hidden' name='june_2013' id='june_2013' value='75' />
+    </div>
+</body>
+</html>
