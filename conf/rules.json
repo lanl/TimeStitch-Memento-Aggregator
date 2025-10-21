@@ -1,0 +1,155 @@
+{
+    "batchdefault" : "ia,blarchive,webcite,archiveit,loc,uknationalarchives,gcwa,archive.is,haw,pt,es,swa,si,ba,cat,aueb,yorku,ukparliament,perma,bsb,nrs,is,nli,proni,banq,cz,nlis,ukgwa",
+    "timegate_dynamicdefault" : "ia,webcite,archiveit,loc,uknationalarchives,gcwa,archive.is,haw,pt,es,swa,si,ba,cat,aueb,yorku,ukparlaiment,perma,bsb,nrs,is,nli,proni,banq,nlis,ukgwa",
+    "timegate_cachedefault" : "ia,blarchive,webcite,archiveit,loc,uknationalarchives,gcwa,archive.is,haw,pt,es,swa,si,ba,cat,aueb,yorku,ukparlaiment,perma,bsb,nrs,is,nli,proni,banq,nlis,ukgwa",
+    "timemap_dynamicdefault" : "ia,webcite,archiveit,loc,uknationalarchives,gcwa,archive.is,haw,pt,es,swa,si,ba,cat,aueb,yorku,ukparlament,perma,bsb,nrs,is,nli,proni,banq,nlis,ukgwa",
+    "timemap_cachedefault" : "ia,blarchive,webcite,archiveit,loc,uknationalarchives,gcwa,archive.is,haw,pt,es,swa,si,ba,cat,aueb,yorku,ukparliament,perma,bsb,nrs,is,nli,proni,banq,cz,nlis,ukgwa",
+    "timetravel_dynamicdefault" : "ia,webcite,archiveit,loc,uknationalarchives,gcwa,archive.is,haw,pt,es,swa,si,ba,cat,aueb,yorku,ukparlaiment,perma,bsb,nrs,is,nli,proni,banq,nlis,ukgwa",
+    "timetravel_cachedefault" : "ia,blarchive,webcite,archiveit,loc,uknationalarchives,gcwa,archive.is,haw,pt,es,swa,si,ba,cat,aueb,yorku,ukparlaiment,perma,bsb,nrs,is,nli,proni,banq,nlis,ukgwa",
+    "rules" :[   
+    {
+        "time": "*",
+        "url": "github.com",
+        "timegate_dynamic":"git",
+        "timegate_cache":"git",
+        "timemap_dynamic":"git",
+        "timemap_cache":"git,timemap_cachedefault",
+        "timetravel_dynamic":"git, timetravel_dynamicdefault",
+        "timetravel_cache":"git, timetravel_cachedefault",
+        "batch":"git,batchdefault"
+    },
+ {
+        "time": "*",
+        "url": ".cz",
+        "timegate_dynamic":"cz,timegate_dynamicdefault",
+        "timegate_cache":"cz,timegate_cachedefault",
+        "timemap_dynamic":"cz,timemap_cachedefault",
+        "timemap_cache":"timemap_cachedefault",
+        "timetravel_dynamic":"cz, timetravel_dynamicdefault",
+        "timetravel_cache":"cz, timetravel_cachedefault",
+        "batch":",batchdefault"
+    },
+    {
+        "time": "*",
+        "url": ".uk",
+        "timegate_dynamic":"ukparliament,timegate_dynamicdefault",
+        "timegate_cache":"timegate_cachedefault",
+        "timemap_dynamic":"timemap_dynamicdefault",
+        "timemap_cache":"timemap_cachedefault",
+        "timetravel_dynamic":"ukparliament, timetravel_dynamicdefault",
+        "timetravel_cache":"timetravel_cachedefault",
+        "batch":"batchdefault"
+    },
+    {
+        "time": "*",
+        "url": "arxiv.org",
+        "timegate_dynamic":"arxiv",
+        "timegate_cache":"arxiv",
+        "timemap_dynamic":"arxiv",
+        "timemap_cache":"arxiv,timemap_cachedefault",
+        "timetravel_dynamic":"arxiv, timetravel_dynamicdefault",
+        "timetravel_cache":"arxiv, timetravel_cachedefault",
+        "batch":"arxiv,batchdefault"
+    },
+     {
+        "time": "*",
+        "url": ".gc.ca",
+        "timegate_dynamic":"gcwa, timegate_dynamicdefault",
+        "timegate_cache":"gcwa, timegate_cachedefault",
+        "timemap_dynamic":"gcwa, timemap_dynamicdefault",
+        "timemap_cache":"gcwa, timemap_cachedefault",
+        "timetravel_dynamic":"gcwa, timetravel_dynamicdefault",
+        "timetravel_cache":"gcwa, timetravel_cachedefault",
+        "batch":"gcwa,batchdefault"
+    }, 
+     {
+        "time": "*",
+        "url": ".gov",
+        "timegate_dynamic":"nara, timegate_dynamicdefault",
+        "timegate_cache":"nara, timegate_cachedefault",
+        "timemap_dynamic":"nara, timemap_dynamicdefault",
+        "timemap_cache":"nara, timemap_cachedefault",
+        "timetravel_dynamic":"nara, timetravel_dynamicdefault",
+        "timetravel_cache":"nara, timetravel_cachedefault",
+        "batch":"nara,batchdefault"
+    }, 
+    {
+        "time": "*",
+        "url": "wikipedia.org",
+        "timegate_dynamic":"wiki",
+        "timegate_cache":"wiki",
+        "timemap_dynamic":"wiki",
+        "timemap_cache":"wiki,timemap_cachedefault",
+        "timetravel_dynamic": "timetravel_dynamicdefault", 
+        "timetravel_cache": "timetravel_cachedefault", 
+        "batch":"batchdefault"
+    },
+    {
+        "time": "*",
+        "url": "orain.org",
+        "timegate_dynamic":"orain",
+        "timegate_cache":"orain",
+        "timemap_dynamic":"orain",
+        "timemap_cache":"orain,timemap_cachedefault",
+        "timetravel_dynamic":"orain, timemap_dynamicdefault",
+        "timetravel_cache":"orain, timetravel_dynamicdefault",
+        "batch":"batchdefault"
+    },
+    {
+        "time": "*",
+        "url": "wikia.com",
+        "timegate_dynamic":"wikia",
+        "timegate_cache":"wikia",
+        "timemap_dynamic":"wikia",
+        "timemap_cache":"wikia,timemap_cachedefault",
+        "timetravel_dynamic":"wikia, timemap_dynamicdefault",
+        "timetravel_cache":"wikia, timetravel_dynamicdefault",
+        "batch":"batchdefault"
+    },
+    {
+        "time": "*",
+        "url": "en.memory-alpha.org",
+        "timegate_dynamic":"wikia",
+        "timegate_cache":"wikia",
+        "timemap_dynamic":"wikia",
+        "timemap_cache":"wikia,timemap_cachedefault",
+        "timetravel_dynamic":"wikia, timetravel_dynamicdefault",
+        "timetravel_cache":"wikia, timetravel_cachedefault",
+        "batch":"batchdefault"
+
+    }, 
+    {
+        "time": "*",
+        "url": "en.memory-alpha.org",
+        "timegate_dynamic":"wikia",
+        "timegate_cache":"wikia",
+        "timemap_dynamic":"wikia",
+        "timemap_cache":"wikia,timemap_cachedefault",
+        "timetravel_dynamic":"wikia, timetravel_dynamicdefault",
+        "timetravel_cache":"wikia, timetravel_cachedefault",
+        "batch":"batchdefault"
+    },
+    {
+        "time": "*",
+        "url": "wiki.ffxiclopedia.org",
+        "timegate_dynamic":"wikia",
+        "timegate_cache":"wikia",
+        "timemap_dynamic":"wikia",
+        "timemap_cache":"wikia,timemap_cachedefault",
+        "timetravel_dynamic":"wikia, timetravel_dynamicdefault",
+        "timetravel_cache":"wikia, timetravel_cachedefault",
+        "batch":"batchdefault"
+    },
+    {
+        "time": "*",
+        "url": "jedipedia.de",
+        "timegate_dynamic":"wikia",
+        "timegate_cache":"wikia",
+        "timemap_dynamic":"wikia",
+        "timemap_cache":"wikia,timemap_cachedefault",
+        "timetravel_dynamic":"wikia, timetravel_dynamicdefault",
+        "timetravel_cache":"wikia, timetravel_cachedefault",
+        "batch":"batchdefault"
+    } 
+    ]
+}
