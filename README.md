@@ -1,24 +1,33 @@
-# Memento Aggregator #
+# © 2025. Triad National Security, LLC. All rights reserved.
 
-This is LANL's Memento Aggregator software. This software aggregates metadata about Mementos by searching for the given Original-URL across a list of web archives around the world. It is fully compliant with the Memento protocol, and exposes the Memento TimeGate and TimeMap interfaces. The aggregated metadata can be cached in a database for faster future accesses. The aggregator software also provides mechanisms to keep this cache fresh by periodically searching in the web archives for any new mementos. 
+This program was produced under U.S. Government contract 89233218CNA000001 for Los Alamos National Laboratory (LANL), which is operated by Triad National Security, LLC for the U.S. Department of Energy/National Nuclear Security Administration. All rights in the program are reserved by Triad National Security, LLC, and the U.S. Department of Energy/National Nuclear Security Administration. The Government is granted for itself and others acting on its behalf a nonexclusive, paid-up, irrevocable worldwide license in this material to reproduce, prepare. derivative works, distribute copies to the public, perform publicly and display publicly, and to permit others to do so.
+# Memento Aggregator #
+Memento Aggregator is a Java service that federates web archives worldwide: given an Original-URL and optional datetime,
+it discovers mementos and exposes standards-compliant Memento TimeGate and TimeMap APIs.
+
+Results are cached in MySQL using the provided schema.
+
+A background refresher keeps entries current using two work queues—priority for live requests and regular for stale cache—running dynamic (fast TimeGate) and thorough (full TimeMap) distributed searches chosen via a JSON rules file that maps URL patterns to archives.
+
+ 
+
+Researchers and digital humanists use the application to find and analyze historical web pages—locating manuals and documents no longer on the live web, building corpora, and studying change over time.
+
+Librarians, archivists, and records managers use it to verify provenance, fill collection gaps across archives.
+
+Journalists, policy analysts, legal/compliance teams, and educators use it to reconstruct past pages for fact-checking and e-discovery, create audit trails, and build teaching materials that trace the evolution of online content.
 
 The aggregator code consists of three sub-projects:
 
-* Aggregator Core. *TODO: Create documentation in wiki*
-* TimeGate & TimeMap Services. *TODO*
-* TimeTravel Services. *TODO*
+* Aggregator Core. 
+* TimeGate & TimeMap Services.
+  
 
-The [wiki](https://bitbucket.org/lanlprototeam/aggregator/wiki/) contains more detailed documentation.
 
 # Compile & Deploy
 
 This page explains how to compile and deploy the aggregator software.
 
-## Code Repository
-The aggregator git repo is in bitbucket.
-
-To clone the repo:
-`git clone https://bitbucket.org/lanlprototeam/aggregator.git`
 
 ## Compile
 Requirements:
@@ -43,9 +52,6 @@ The schema file as of 2015-08-19 looks like:
 https://www.dropbox.com/s/13n0pd9arb6cky2/agg_tables.sql?dl=0
 
 Update the `agg.properties` file with the appropriate mysql information like user credentials and mysql location.
-
-### Cassandra
-Although the aggregator supports cassandra, it is not used in production and hence not covered here.
 
 ## Deploy
 A Java wrapper from [Tanuki software](http://wrapper.tanukisoftware.com/) is being used for deploying the aggregator. 
@@ -152,17 +158,17 @@ The aggregator will respond from cache, if the URL is available. Otherwise respo
 ## Archives and Rules
 The aggregator follows a set of rules to choose the list of archives to query for mementos. The list of archives to poll generally depends on the requested URL and the aggregator service being requested; whether the request is for TimeGate, TimeMap, or TimeTravel related services. It may also depend on the requested date time, but this functionality has not been implemented yet. The basic premise for the rules and the archive list is that, certain archives may have a better collection of mementos for certain kinds of URLs. For example, the UK national web archives may have a better coverage of all URLs that have .uk in the domain name, so we can define a rule in the aggregator to look in this archive for all .uk domains. 
 
-These rules are written in a file in JSON format, and is accessible from the URL: [http://labs.mementoweb.org/aggregator_config/rules.json](http://labs.mementoweb.org/aggregator_config/rules.json). For every request in Scenarios 2, 3, and 4, the aggregator refers to this rules file to determine which archives it should include in its dynamic distributed search.
+These rules are written in a file in JSON format). For every request in Scenarios 2, 3, and 4, the aggregator refers to this rules file to determine which archives it should include in its dynamic distributed search.
 
 The Rules file contain the list of archives that should be used for both dynamic search and cache/thorough searches for each of the different aggregator services. For example, the attributes `timetravel_dynamicdefault` lists the archives that should be queried for dynamic timetravel requests, and `timetravel_cachedefault` lists the archives for the thourough timetravel requests.
 
 In addition, the file also lists rules per URL pattern in the array named `rules`. For example, the aggregator can be told to query the GitHub TimeGate only for request URLs that begin with github.com, and not for any other request. If any of these rules is not applicable to a URL, then the aggregator uses the default archive list like `timetravel_dynamicdefault`. 
 
-The archive names listed in this file is the `archive_id` attribute for each archive registered in the central [Archive List XML file](http://labs.mementoweb.org/aggregator_config/archivelist.xml). 
+The archive names listed in this file is the `archive_id` attribute for each archive registered in the [Archive List XML file](l). 
 
 ## Database
 
-The MySQL database schema can be found [here](http://timetravel.mementoweb.org/internal/aggregator/). The two main tables the aggregator uses are `links` and `linkmaster`. 
+ The two main tables the aggregator uses are `links` and `linkmaster`. 
 
 The `linkmaster` table stores information about the original URL, its latest request time, the number of times the url was requested, and the last time this url was updated in the cache. It also contains a unique `id` field which is a MD5 hash of the original url. The protocol in the request url is strippped before storing it and also before computing the `id`. There reasons for that are explained below. This table structure is given below. 
 ```
@@ -223,11 +229,11 @@ The URL blacklist if provided by [The Unversity of Toulouse 1 Capitole](http://d
 
 ### Test urls
 ```
-curl -I http://timetravel.mementoweb.org/api/json/2015/http://Greensboro.com
-curl -I  -H   "cache-control: no-cache" http://timetravel.mementoweb.org/timegate/http://poppys-style.com
-curl       http://proto1.lanl.gov:9999/timemap/link/1/http://poppys-style.com
-curl       http://proto1.lanl.gov:9999/list/2015/http://Greensboro.com
-curl  -I  -H 'Accept-Datetime: Sun, 06 Mar 2016 01:19:12 GMT' http://timetravel.mementoweb.org/timegate/http://www.mementoweb.org
+curl -I http://[hostname]/api/json/2015/http://Greensboro.com
+curl -I  -H   "cache-control: no-cache" http://[hostname]/timegate/http://poppys-style.com
+curl       http://[hostname]/timemap/link/1/http://poppys-style.com
+curl       http://[hostname]/list/2015/http://Greensboro.com
+curl  -I  -H 'Accept-Datetime: Sun, 06 Mar 2016 01:19:12 GMT' http://[hostname]/timegate/http://www.mementoweb.org
 ```
 ### Flow charts 
 * [The timetravel flow chart ](img/Mementowebtimegate.png)
@@ -235,3 +241,15 @@ curl  -I  -H 'Accept-Datetime: Sun, 06 Mar 2016 01:19:12 GMT' http://timetravel.
 * [The timetravel cache update flow chart ](img/timetravelbackgr.png)
 * [The timetravel loging  chart ](img/timetravelloging.png)
 * [The labs timemap flow  chart ](img/labstimemap.png)
+
+### license
+
+This program is Open-Source under the BSD-3 License.
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
