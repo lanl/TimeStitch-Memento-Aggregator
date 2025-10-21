@@ -47,24 +47,15 @@ A successful compilation will create two JAR files
 ## Database
 ### MySQL
 Use the schema file provided to create the necessary database and tables for the aggregator. 
-
-The schema file as of 2015-08-19 looks like:
-https://www.dropbox.com/s/13n0pd9arb6cky2/agg_tables.sql?dl=0
-
 Update the `agg.properties` file with the appropriate mysql information like user credentials and mysql location.
 
 ## Deploy
-A Java wrapper from [Tanuki software](http://wrapper.tanukisoftware.com/) is being used for deploying the aggregator. 
-
-==#TODO Provide a link to the wrapper version currently in production, along with the `wrapper.conf` and `agg.properties` files.==
+you can use shell script to deploy or 
+A Java wrapper from [Tanuki software](http://wrapper.tanukisoftware.com/) . 
 
 Copy over the 2 agg*.jar files referenced in the "Compile" section above to the `./lib/` folder of the wrapper. Additional jar files that were produced during the compilation (`agr-webapp|agg-core/target/dep/*`) should also be copied to the `./lib/` folder if they are not already there.
 
-Edit the agg.properties file and wrapper.conf file with the appropriate parameters. The most recent file in mementoweb server looks like:
-https://www.dropbox.com/s/al8e7sibxpuqicg/agg_mweb.properties?dl=0
-
-The wrapper.conf looks like:
-https://www.dropbox.com/s/0j3688tlc00bho1/wrapper.conf?dl=0
+Edit the agg.properties file.
 
 Start/stop the aggregator:
 `bin/aggapp start`| `bin/aggapp stop`
