@@ -43,7 +43,8 @@ A successful compilation will create two JAR files
 * `agr-webapp/target/agg*.jar`
 * `agg-core/target/agg*.jar`
 
-
+## Config
+examples of config files are located at ./conf directories
 ## Database
 ### MySQL
 Use the schema file provided to create the necessary database and tables for the aggregator. 
