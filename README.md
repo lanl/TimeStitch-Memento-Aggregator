@@ -1,7 +1,8 @@
 # © 2025. Triad National Security, LLC. All rights reserved.
 
-This program was produced under U.S. Government contract 89233218CNA000001 for Los Alamos National Laboratory (LANL), which is operated by Triad National Security, LLC for the U.S. Department of Energy/National Nuclear Security Administration. All rights in the program are reserved by Triad National Security, LLC, and the U.S. Department of Energy/National Nuclear Security Administration. The Government is granted for itself and others acting on its behalf a nonexclusive, paid-up, irrevocable worldwide license in this material to reproduce, prepare. derivative works, distribute copies to the public, perform publicly and display publicly, and to permit others to do so.
-# Memento Aggregator #
+This program was produced under U.S. Government contract 89233218CNA000001 for Los Alamos National Laboratory (LANL), which is operated by Triad National Security, LLC for the U.S. Department of Energy/National Nuclear Security Administration. All rights in the program are reserved by Triad National Security, LLC, and the U.S. Department of Energy/National Nuclear Security Administration. The Government is granted for itself and others acting on its behalf a nonexclusive, paid-up, irrevocable worldwide license in this material to reproduce, prepare derivative works, distribute copies to the public, perform publicly and display publicly, and to permit others to do so.
+
+# Memento Aggregator
 Memento Aggregator is a Java service that federates web archives worldwide: given an Original-URL and optional datetime,
 it discovers mementos and exposes standards-compliant Memento TimeGate and TimeMap APIs.
 
@@ -64,7 +65,7 @@ Start/stop the aggregator:
 By default, the aggregator will listen to port 8080, and write to the log file in the directory `logs/wrapper.log`. These can be changed by editing the wrapper config file `conf/wrapper.conf`. 
 
 ### nginx Config
-The relavant nginx config used in production is shown below. The services that need to be exposed are explicitly mentioned. 
+The relevant nginx config used in production is shown below. The services that need to be exposed are explicitly mentioned. 
 
 ```
 server {
@@ -75,6 +76,7 @@ server {
 		proxy_set_header Host $host;
 		proxy_set_header X-Real_IP $remote_addr;
 	}
+}
 ```
 
 # Aggregator Workings
@@ -152,7 +154,7 @@ The aggregator follows a set of rules to choose the list of archives to query fo
 
 These rules are written in a file in JSON format). For every request in Scenarios 2, 3, and 4, the aggregator refers to this rules file to determine which archives it should include in its dynamic distributed search.
 
-The Rules file contain the list of archives that should be used for both dynamic search and cache/thorough searches for each of the different aggregator services. For example, the attributes `timetravel_dynamicdefault` lists the archives that should be queried for dynamic timetravel requests, and `timetravel_cachedefault` lists the archives for the thourough timetravel requests.
+The Rules file contain the list of archives that should be used for both dynamic search and cache/thorough searches for each of the different aggregator services. For example, the attributes `timetravel_dynamicdefault` lists the archives that should be queried for dynamic timetravel requests, and `timetravel_cachedefault` lists the archives for the thorough timetravel requests.
 
 In addition, the file also lists rules per URL pattern in the array named `rules`. For example, the aggregator can be told to query the GitHub TimeGate only for request URLs that begin with github.com, and not for any other request. If any of these rules is not applicable to a URL, then the aggregator uses the default archive list like `timetravel_dynamicdefault`. 
 
@@ -162,7 +164,7 @@ The archive names listed in this file is the `archive_id` attribute for each arc
 
  The two main tables the aggregator uses are `links` and `linkmaster`. 
 
-The `linkmaster` table stores information about the original URL, its latest request time, the number of times the url was requested, and the last time this url was updated in the cache. It also contains a unique `id` field which is a MD5 hash of the original url. The protocol in the request url is strippped before storing it and also before computing the `id`. There reasons for that are explained below. This table structure is given below. 
+The `linkmaster` table stores information about the original URL, its latest request time, the number of times the url was requested, and the last time this url was updated in the cache. It also contains a unique `id` field which is a MD5 hash of the original url. The protocol in the request url is stripped before storing it and also before computing the `id`. There reasons for that are explained below. This table structure is given below. 
 ```
 +---------+---------------+------+-----+---------+-------+
 | Field   | Type          | Null | Key | Default | Extra |
@@ -217,7 +219,7 @@ The aggregator does not differentiate between http and https resources, even tho
 ## URL Blacklist
 The aggregator now checks every requested url and will return an `HTTP 403 Forbidden` error if the url is in a blacklist. This prohibits the aggregator from serving pornographic or malicious content. 
 
-The URL blacklist if provided by [The Unversity of Toulouse 1 Capitole](http://dsi.ut-capitole.fr/blacklists/index_en.php) and contains about 130 million blacklisted domain names in various categories.
+The URL blacklist is provided by [The University of Toulouse 1 Capitole](http://dsi.ut-capitole.fr/blacklists/index_en.php) and contains about 130 million blacklisted domain names in various categories.
 
 ### Test urls
 ```
@@ -231,7 +233,7 @@ curl  -I  -H 'Accept-Datetime: Sun, 06 Mar 2016 01:19:12 GMT' http://[hostname]/
 * [The timetravel flow chart ](img/Mementowebtimegate.png)
 * [The timetravel timemap flow chart ](img/timemtraveltimemapservice.png)
 * [The timetravel cache update flow chart ](img/timetravelbackgr.png)
-* [The timetravel loging  chart ](img/timetravelloging.png)
+* [The timetravel logging  chart ](img/timetravelloging.png)
 * [The labs timemap flow  chart ](img/labstimemap.png)
 
 ### license
